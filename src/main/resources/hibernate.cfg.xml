@@ -9,7 +9,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-    <session-factory name="foo">
+    <session-factory >
         <property name="connection.url">jdbc:mysql:///user</property>
         <property name="connection.username">root</property>
         <property name="connection.password">123456</property>

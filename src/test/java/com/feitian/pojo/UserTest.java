@@ -25,9 +25,18 @@ public class UserTest {
             sessionFactory = conf.buildSessionFactory();
             session = sessionFactory.getCurrentSession();//推荐使用，方便知道当前用户，会自动关闭
 //            session = sessionFactory.openSession();
-
+            tx = session.beginTransaction();
+            User user = new User();
+            user.setId(10);
+            user.setName("胡天霸");
+            user.setSex("male");
+            session.save(user);
+            tx.commit();
         }catch (Exception e){
             e.printStackTrace();
+            if (tx !=null){
+                tx.rollback();
+            }
         }
 
     }
