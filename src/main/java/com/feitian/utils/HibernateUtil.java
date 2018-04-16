@@ -9,7 +9,7 @@ import org.hibernate.cfg.Configuration;
  * @Date: 2018-04-16  17:16
  * @description:
  */
-public class hibernateUtil {
+public class HibernateUtil {
     private static Configuration conf;
     private final static SessionFactory sessionFactory ;
 
@@ -23,7 +23,7 @@ public class hibernateUtil {
         }
     }
 
-    private hibernateUtil() {
+    private HibernateUtil() {
     }
 
     public static Session getCurrentSession(){

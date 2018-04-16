@@ -1,9 +1,10 @@
 package com.feitian.service;
 
 import com.feitian.dao.UserDao;
-import com.feitian.utils.hibernateUtil;
+import com.feitian.utils.HibernateUtil;
 import com.feitian.pojo.User;
 import org.hibernate.Transaction;
+import java.io.Serializable;
 
 /**
  * @Author: feitian
@@ -15,7 +16,7 @@ public class UserService {
         Transaction tx = null;
 
         try {
-           tx = hibernateUtil.getCurrentSession().beginTransaction();
+           tx = HibernateUtil.getCurrentSession().beginTransaction();
 
            new UserDao().save(user);
 
@@ -26,5 +27,37 @@ public class UserService {
                 tx.rollback();
             }
         }
+    }
+    public User getUser2Get(Serializable id){
+        Transaction tx = null;
+        User user = null;
+
+        try {
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+            user = new UserDao().get(id);
+            tx.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            if (tx!=null){
+                tx.rollback();
+            }
+        }
+        return user;
+    }
+    public User getUesr2Load(Serializable id){
+        User user = null ;
+        Transaction tx = null;
+        try {
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+            user = new UserDao().load(id);
+            System.out.println("user name : " + user.getName());
+            tx.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            if (tx!=null){
+                tx.rollback();
+            }
+        }
+        return user ;
     }
 }

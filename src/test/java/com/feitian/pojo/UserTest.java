@@ -3,6 +3,7 @@ package com.feitian.pojo;
 import com.feitian.service.UserService;
 import org.junit.Test;
 
+import java.io.Serializable;
 
 
 /**
@@ -19,5 +20,16 @@ public class UserTest {
         new UserService().addUser(user);
 
     }
+    @Test
+    public void testGetUserByGet(){
+        Serializable id = 1;
+        User user = new UserService().getUser2Get(id);
+        System.out.println("user name : " + user.getName());
+    }
+    @Test
+    public void testGetUserByLoad(){
+        Serializable id = 1;
+        User user = new UserService().getUesr2Load(id);
 
+    }
 }
