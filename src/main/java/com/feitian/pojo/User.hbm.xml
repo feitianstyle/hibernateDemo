@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="com.feitian.pojo.User" table="`user`">
+        <!--主键 对应列设置-->
+        <id name="id" column="`id`" type="java.lang.Integer">
+            <generator class="identity"/>
+            <!--自动增长方式 下面这样设置会自动匹配各个数据库自动增长类型-->
+            <!--<generator class="native"/>-->
+        </id>
+        <!--其他属性对应表的相应列-->
+        <property name="name" column="`name`" type="java.lang.String"/>
+        <property name="sex" column="`sex`" type="java.lang.String"/>
+    </class>
+</hibernate-mapping>
