@@ -144,4 +144,11 @@ public class UserTest {
             System.out.println(user.getName() + " " + user.getSalary());
         }
     }
+    @Test
+    public void testFindColum(){
+        List<Object> str = new UserService().findColum();
+        for (Object obj:str) {
+            System.out.println(obj);
+        }
+    }
 }

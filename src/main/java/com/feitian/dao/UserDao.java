@@ -3,6 +3,7 @@ package com.feitian.dao;
 import com.feitian.pojo.User;
 import com.feitian.utils.HibernateUtil;
 import com.sun.org.apache.regexp.internal.REUtil;
+import javafx.beans.binding.ObjectExpression;
 import org.hibernate.query.Query;
 
 import java.io.Serializable;
@@ -130,6 +131,15 @@ public class UserDao {
         return  HibernateUtil.getCurrentSession().createQuery("from User order by salary desc")
                 .setFirstResult((pageNo-1)*pageSize)
                 .setMaxResults(pageSize)
+                .list();
+    }
+
+    /**
+     * 投影查询，如果查询为多个属性，返回的类型为List<Object[]>这种类型
+     * @return
+     */
+    public List<Object> findColum(){
+        return HibernateUtil.getCurrentSession().createQuery("select name from User")
                 .list();
     }
 }

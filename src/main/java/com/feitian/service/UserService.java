@@ -333,4 +333,20 @@ public class UserService {
         }
         return users;
     }
+
+    public List<Object> findColum(){
+        Transaction tx = null ;
+        List<Object> ss = null ;
+        try{
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+            ss = userDao.findColum();
+        }catch (Exception e){
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+            return ss;
+    }
+
 }
