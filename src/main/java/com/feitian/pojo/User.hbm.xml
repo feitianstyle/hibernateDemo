@@ -15,5 +15,9 @@
         <!--其他属性对应表的相应列-->
         <property name="name" column="`name`" type="java.lang.String"/>
         <property name="sex" column="`sex`" type="java.lang.String"/>
+        <property name="address" column="address" type="java.lang.String"/>
+        <property name="birthday" column="birthday" type="java.util.Date"/>
+        <property name="salary" column="salary" type="java.lang.Double"/>
+        <property name="wife" column="wife" type="java.lang.String"/>
     </class>
 </hibernate-mapping>

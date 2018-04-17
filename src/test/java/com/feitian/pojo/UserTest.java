@@ -1,10 +1,10 @@
 package com.feitian.pojo;
 
 import com.feitian.service.UserService;
+import com.feitian.utils.DateUtil;
 import org.junit.Test;
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -78,7 +78,7 @@ public class UserTest {
     public void testQueryUser(){
         List<User> users = new UserService().queryUser();
         for (User user:users) {
-            System.out.println(user.getName());
+            System.out.println(user.getName() + " " + user.getAddress());
         }
     }
     @Test
@@ -113,6 +113,26 @@ public class UserTest {
         List<User> users = new UserService().getUserByUser(user);
         for (User u:users) {
             System.out.println(u.getName());
+        }
+    }
+    @Test
+    public void testFindUserByHql(){
+        User user = new User();
+        user.setSalary(2000.0);
+        user.setBrithday(DateUtil.strToDate("2018-02-4","yyyy-MM-dd"));
+        List<User> users = new UserService().findUserByHql(user);
+        for (User u:users) {
+            System.out.println(u.getName() + " " + u.getAddress());
+        }
+    }
+    @Test
+    public void testFindUserByMap(){
+        Map<String,Object> map = new HashMap<>();
+        map.put("salary",2000.0);
+        map.put("birthday",DateUtil.strToDate("2018-02-4","yyyy-MM-dd"));
+        List<User> users = new UserService().findUserByMap(map);
+        for (User u:users) {
+            System.out.println(u.getName() + " " + u.getAddress());
         }
     }
 }

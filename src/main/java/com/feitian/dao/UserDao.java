@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: feitian
@@ -104,6 +105,18 @@ public class UserDao {
     public List<User> getUserByUser(User user){
         Query query = HibernateUtil.getCurrentSession().createQuery("from User where name = :name or sex = :sex");
         query.setProperties(user);
+        return query.list();
+    }
+
+    public List<User> findUserByHql(String hql,User user){
+        Query query = HibernateUtil.getCurrentSession().createQuery(hql);
+        query.setProperties(user);
+        return query.list();
+    }
+
+    public List<User> findUserByMap(String hql, Map<String,Object> map){
+        Query query = HibernateUtil.getCurrentSession().createQuery(hql);
+        query.setProperties(map);
         return query.list();
     }
 }

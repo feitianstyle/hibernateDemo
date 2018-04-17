@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: feitian
@@ -14,14 +15,14 @@ import java.util.List;
  * @description:
  */
 public class UserService {
-
+    private UserDao userDao = new UserDao();
     public void updateUser(User user) {
         Transaction tx = null;
 
         try {
             tx = HibernateUtil.getCurrentSession().beginTransaction();
 
-            User u = new UserDao().load(user.getId());
+            User u = userDao.load(user.getId());
             u.setName(user.getName());
             u.setSex(user.getSex());
 
@@ -40,7 +41,7 @@ public class UserService {
         try {
             tx = HibernateUtil.getCurrentSession().beginTransaction();
 
-            new UserDao().save(user);
+            userDao.save(user);
 
             tx.commit();
         } catch (Exception e) {
@@ -57,7 +58,7 @@ public class UserService {
 
         try {
             tx = HibernateUtil.getCurrentSession().beginTransaction();
-            user = new UserDao().get(id);
+            user = userDao.get(id);
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,7 +74,7 @@ public class UserService {
         Transaction tx = null;
         try {
             tx = HibernateUtil.getCurrentSession().beginTransaction();
-            user = new UserDao().load(id);
+            user =userDao.load(id);
             System.out.println("user name : " + user.getName());
             tx.commit();
         } catch (Exception e) {
@@ -89,7 +90,7 @@ public class UserService {
         Transaction tx = null;
         try {
             tx = HibernateUtil.getCurrentSession().beginTransaction();
-            new UserDao().update(user);
+            userDao.update(user);
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,7 +104,7 @@ public class UserService {
         Transaction tx = null;
         try {
             tx = HibernateUtil.getCurrentSession().beginTransaction();
-            new UserDao().merge(user);
+            userDao.merge(user);
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,7 +118,7 @@ public class UserService {
         Transaction tx = null;
         try {
             tx = HibernateUtil.getCurrentSession().beginTransaction();
-            new UserDao().deleteUser(id);
+            userDao.deleteUser(id);
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,7 +132,7 @@ public class UserService {
         Transaction tx = null;
         try {
             tx = HibernateUtil.getCurrentSession().beginTransaction();
-            new UserDao().deleteUser_2(user);
+            userDao.deleteUser_2(user);
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,7 +146,7 @@ public class UserService {
         Transaction tx = null;
         try {
             tx = HibernateUtil.getCurrentSession().beginTransaction();
-            new UserDao().saveOrUpdate(user);
+            userDao.saveOrUpdate(user);
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,7 +161,7 @@ public class UserService {
         List<User> users = null;
         try {
             tx = HibernateUtil.getCurrentSession().beginTransaction();
-            users = new UserDao().queryUser();
+            users = userDao.queryUser();
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,7 +177,7 @@ public class UserService {
         Transaction tx = null;
         try {
             tx = HibernateUtil.getCurrentSession().beginTransaction();
-            iterable = new UserDao().queryUser2Iterable();
+            iterable = userDao.queryUser2Iterable();
             while (iterable.hasNext()) {
                 User user = (User) iterable.next();
                 System.out.println(user.getName());
@@ -196,7 +197,7 @@ public class UserService {
         Long count = null;
         try {
             tx = HibernateUtil.getCurrentSession().beginTransaction();
-            count = new UserDao().countUser();
+            count = userDao.countUser();
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -212,7 +213,7 @@ public class UserService {
         List<User> users = null;
         try {
             tx = HibernateUtil.getCurrentSession().beginTransaction();
-            users = new UserDao().getUserByName(name);
+            users = userDao.getUserByName(name);
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -228,7 +229,7 @@ public class UserService {
         List<User> users = null;
         try {
             tx = HibernateUtil.getCurrentSession().beginTransaction();
-            users = new UserDao().getUserBySex(sex);
+            users = userDao.getUserBySex(sex);
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -244,7 +245,69 @@ public class UserService {
         List<User> users = null;
         try {
             tx = HibernateUtil.getCurrentSession().beginTransaction();
-            users = new UserDao().getUserByUser(user);
+            users = userDao.getUserByUser(user);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+        return users;
+    }
+
+    public List<User>  findUserByHql(User user){
+        Transaction tx = null;
+        List<User> users = null;
+        try {
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+            StringBuilder stringBuilder = new StringBuilder("from User where 1=1");
+            if (user.getName()!=null && !user.getName().equals("")){
+                stringBuilder.append(" and name = :name");
+            }
+            if (user.getSex()!=null&&!user.getSex().equals("")){
+                stringBuilder.append(" and sex = :sex");
+            }
+            if(user.getBrithday()!=null&&user.getBrithday().equals("")){
+                stringBuilder.append(" and birthday > :birthday");
+            }
+            if (user.getSalary() != 0){
+                stringBuilder.append(" and salary > :salary ");
+            }
+
+            users = userDao.findUserByHql(stringBuilder.toString(),user);
+            System.out.println(stringBuilder.toString());
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+        return users;
+    }
+
+    public List<User> findUserByMap(Map<String,Object> map){
+        Transaction tx = null;
+        List<User> users = null;
+        try {
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+            StringBuilder stringBuilder = new StringBuilder("from User where 1=1 ");
+            if (map.get("name")!=null){
+                stringBuilder.append(" and name = :name");
+            }
+            if (map.get("sex")!=null){
+                stringBuilder.append(" and sex = :sex");
+            }
+            if(map.get("birthday")!=null){
+                stringBuilder.append(" and birthday > :birthday");
+            }
+            if (map.get("salary") != null){
+                stringBuilder.append(" and salary > :salary ");
+            }
+
+            users = userDao.findUserByMap(stringBuilder.toString(),map);
+            System.out.println(stringBuilder.toString());
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
