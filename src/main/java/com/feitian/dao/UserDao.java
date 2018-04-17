@@ -119,4 +119,17 @@ public class UserDao {
         query.setProperties(map);
         return query.list();
     }
+
+    /**
+     * 分页查询
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    public List<User> findUserByPage(int pageNo,int pageSize){
+        return  HibernateUtil.getCurrentSession().createQuery("from User order by salary desc")
+                .setFirstResult((pageNo-1)*pageSize)
+                .setMaxResults(pageSize)
+                .list();
+    }
 }

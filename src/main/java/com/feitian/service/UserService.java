@@ -317,4 +317,20 @@ public class UserService {
         }
         return users;
     }
+
+    public List<User> findUserByPage(int pageNo,int pageSize){
+        Transaction tx = null;
+        List<User> users = null;
+        try {
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+            users = userDao.findUserByPage(pageNo,pageSize);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+        return users;
+    }
 }

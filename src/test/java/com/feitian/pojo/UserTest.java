@@ -135,4 +135,13 @@ public class UserTest {
             System.out.println(u.getName() + " " + u.getAddress());
         }
     }
+    @Test
+    public void testFindUserByPage(){
+        int pageNo = 1;
+        int pageSize = 10 ;
+        List<User> users = new UserService().findUserByPage(pageNo,pageSize);
+        for (User user:users) {
+            System.out.println(user.getName() + " " + user.getSalary());
+        }
+    }
 }
