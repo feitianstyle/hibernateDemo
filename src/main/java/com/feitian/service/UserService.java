@@ -238,4 +238,20 @@ public class UserService {
         }
         return users;
     }
+
+    public List<User> getUserByUser(User user){
+        Transaction tx = null;
+        List<User> users = null;
+        try {
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+            users = new UserDao().getUserByUser(user);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+        return users;
+    }
 }

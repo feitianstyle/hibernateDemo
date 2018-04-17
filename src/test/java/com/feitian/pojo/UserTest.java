@@ -1,7 +1,6 @@
 package com.feitian.pojo;
 
 import com.feitian.service.UserService;
-import com.sun.javafx.UnmodifiableArrayList;
 import org.junit.Test;
 import java.io.Serializable;
 import java.util.Iterator;
@@ -104,6 +103,16 @@ public class UserTest {
         List<User> users = new UserService().getUserBySex(sex);
         for (User user:users) {
             System.out.println(user.getName());
+        }
+    }
+    @Test
+    public void testGetUserByUser(){
+        User user = new User();
+        user.setName("binghanhan");
+        user.setSex("man");
+        List<User> users = new UserService().getUserByUser(user);
+        for (User u:users) {
+            System.out.println(u.getName());
         }
     }
 }

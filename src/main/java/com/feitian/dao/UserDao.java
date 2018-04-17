@@ -3,6 +3,7 @@ package com.feitian.dao;
 import com.feitian.pojo.User;
 import com.feitian.utils.HibernateUtil;
 import com.sun.org.apache.regexp.internal.REUtil;
+import org.hibernate.query.Query;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -90,8 +91,19 @@ public class UserDao {
                 .setParameter(0,name).list();
     }
 
+    /**
+     * 推荐使用这种使用名称的占位符
+     * @param  sex
+     * @return List<User>
+     */
     public List<User> getUserBySex(String sex){
         return HibernateUtil.getCurrentSession().createQuery("from User where sex = :sex")
-                .setParameter(sex,sex).list();
+                .setParameter("sex",sex).list();
+    }
+
+    public List<User> getUserByUser(User user){
+        Query query = HibernateUtil.getCurrentSession().createQuery("from User where name = :name or sex = :sex");
+        query.setProperties(user);
+        return query.list();
     }
 }
