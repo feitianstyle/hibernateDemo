@@ -10,7 +10,7 @@
 
 <hibernate-configuration>
     <session-factory >
-        <property name="connection.url">jdbc:mysql:///user</property>
+        <property name="connection.url">jdbc:mysql:///user?useSSL=true</property>
         <property name="connection.username">root</property>
         <property name="connection.password">123456</property>
 
