@@ -16,7 +16,14 @@ public class User implements Serializable {
     private String address;
     private String wife;
     private Date birthday;
+    private Dept deptNo;
 
+    public Dept getDeptNo() {
+        return deptNo;
+    }
+    public void setDeptNo(Dept deptNo) {
+        this.deptNo = deptNo;
+    }
     public Date getBirthday() {
         return birthday;
     }

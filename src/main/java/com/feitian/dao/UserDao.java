@@ -142,4 +142,8 @@ public class UserDao {
         return HibernateUtil.getCurrentSession().createQuery("select name from User")
                 .list();
     }
+
+    public User findUserByget(Serializable id){
+        return HibernateUtil.getCurrentSession().get(User.class,id);
+    }
 }

@@ -349,4 +349,20 @@ public class UserService {
             return ss;
     }
 
+    public User findUserByget(Serializable id){
+        Transaction tx = null ;
+        User user = null;
+        try{
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+            user = userDao.findUserByget(id);
+           //System.out.println(user.getName() + " " + user.getDeptNo().getName());
+        }catch (Exception e){
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+        return user;
+    }
+
 }

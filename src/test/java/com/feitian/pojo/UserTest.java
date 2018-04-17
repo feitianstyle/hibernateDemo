@@ -151,4 +151,10 @@ public class UserTest {
             System.out.println(obj);
         }
     }
+    @Test
+    public void tertFindUserByGet(){
+        Serializable id = 3 ;
+        User user = new UserService().findUserByget(id);
+        System.out.println("部门编号：" + user.getDeptNo().getDeptNo() + " " + user.getDeptNo().getName());
+    }
 }
