@@ -12,6 +12,26 @@ import java.io.Serializable;
  * @description:
  */
 public class UserService {
+
+    public void updateUser(User user){
+        Transaction tx = null;
+
+        try {
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+
+            User u = new UserDao().load(user.getId());
+            u.setName(user.getName());
+            u.setSex(user.getSex());
+
+            tx.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            if (tx!=null){
+                tx.rollback();
+            }
+        }
+    }
+
     public void addUser(User user){
         Transaction tx = null;
 
@@ -59,5 +79,59 @@ public class UserService {
             }
         }
         return user ;
+    }
+    public void update(User user){
+        Transaction tx = null;
+        try {
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+            new UserDao().update(user);
+            tx.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            if (tx!=null){
+                tx.rollback();
+            }
+        }
+    }
+
+    public void merge(User user){
+        Transaction tx = null;
+        try {
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+            new UserDao().merge(user);
+            tx.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            if (tx!=null){
+                tx.rollback();
+            }
+        }
+    }
+
+    public void deleteUser(Serializable id){
+        Transaction tx = null;
+        try {
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+            new UserDao().deleteUser(id);
+            tx.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            if (tx!=null){
+                tx.rollback();
+            }
+        }
+    }
+    public void deleteUser(User user){
+        Transaction tx = null;
+        try {
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+            new UserDao().deleteUser_2(user);
+            tx.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            if (tx!=null){
+                tx.rollback();
+            }
+        }
     }
 }

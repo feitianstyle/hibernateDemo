@@ -4,8 +4,8 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-
-    <class name="com.feitian.pojo.User" table="`user`">
+    <!--dynamic-update为动态更新，只更新改变的字段,但更新前会有额外的查询，所以有利有弊-->
+    <class name="com.feitian.pojo.User" table="`user`" dynamic-update="true">
         <!--主键 对应列设置-->
         <id name="id" column="`id`" type="java.lang.Integer">
             <generator class="identity"/>

@@ -2,7 +2,6 @@ package com.feitian.pojo;
 
 import com.feitian.service.UserService;
 import org.junit.Test;
-
 import java.io.Serializable;
 
 
@@ -31,5 +30,40 @@ public class UserTest {
         Serializable id = 1;
         User user = new UserService().getUesr2Load(id);
 
+    }
+    @Test
+    public void testUpdateUser(){
+        User user = new User();
+        user.setId(1);
+        user.setName("并韩寒");
+        user.setSex("femal");
+        new UserService().updateUser(user);
+    }
+    @Test
+    public void testUpdate(){
+        User user = new User();
+        user.setId(1);
+        user.setSex("man");
+        user.setName("binghanhan");
+        new UserService().update(user);
+    }
+    @Test
+    public void testMerge(){
+        User user = new User();
+        user.setId(2);
+        user.setSex("man");
+        user.setName("binghanhan");
+        new UserService().merge(user);
+    }
+    @Test
+    public void testDeleteUser(){
+        Serializable id = 6 ;
+        new UserService().deleteUser(id);
+    }
+    @Test
+    public void testDeleteUser_2(){
+       User user = new User();
+       user.setId(4);
+       new UserService().deleteUser(user);
     }
 }

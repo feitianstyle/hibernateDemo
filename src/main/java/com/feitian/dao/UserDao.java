@@ -20,4 +20,17 @@ public class UserDao {
     public User load(Serializable id){
         return HibernateUtil.getCurrentSession().load(User.class,id);
     }
+    public void update(User user){
+        HibernateUtil.getCurrentSession().update(user);
+    }
+    public void merge(User user){
+        HibernateUtil.getCurrentSession().merge(user);
+    }
+    public void deleteUser(Serializable id){
+        User user = load(id);
+        HibernateUtil.getCurrentSession().delete(user);
+    }
+    public void deleteUser_2(User user){
+        HibernateUtil.getCurrentSession().delete(user);
+    }
 }
