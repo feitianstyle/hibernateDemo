@@ -8,18 +8,17 @@
         <id name="id">
             <column name="id" sql-type="int(10)"/>
         </id>
+        <property name="deptNo" column="deptNo" type="java.lang.Integer"/>
         <property name="name">
             <column name="name" sql-type="varchar(255)" />
         </property>
         <property name="address">
             <column name="address" sql-type="varchar(255)"/>
         </property>
-        <property name="deptNo">
-            <column name="deptNo" sql-type="int(10)" />
-        </property>
-        <set name="users">
-            <key column="deptNo"/>
+        <set name="users" cascade="save-update">
+            <key column="deptNo" />
             <one-to-many class="com.feitian.pojo.User"/>
         </set>
+
     </class>
 </hibernate-mapping>

@@ -19,4 +19,7 @@ public class DeptDao {
     public Dept getDeptById(Serializable id){
         return HibernateUtil.getCurrentSession().get(Dept.class,id);
     }
+    public void saveByDept(Dept dept){
+        HibernateUtil.getCurrentSession().save(dept);
+    }
 }

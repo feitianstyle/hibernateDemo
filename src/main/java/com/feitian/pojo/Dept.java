@@ -15,7 +15,7 @@ import java.util.Set;
  */
 @Entity
 public class Dept {
-    private int id;
+    public int id;
     private String name;
     private String address;
     private Integer deptNo;
@@ -29,8 +29,7 @@ public class Dept {
         this.users = users;
     }
 
-    @Id
-    @Column(name = "id", nullable = false)
+
     public int getId() {
         return id;
     }
@@ -69,20 +68,5 @@ public class Dept {
         this.deptNo = deptNo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dept dept = (Dept) o;
-        return id == dept.id &&
-                Objects.equals(name, dept.name) &&
-                Objects.equals(address, dept.address) &&
-                Objects.equals(deptNo, dept.deptNo);
-    }
 
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, name, address, deptNo);
-    }
 }

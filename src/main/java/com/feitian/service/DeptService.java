@@ -31,4 +31,18 @@ public class DeptService {
         return dept;
     }
 
+    public void save(Dept dept){
+        Transaction tx = null ;
+        try{
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+            deptDao.saveByDept(dept);
+            tx.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
 }
