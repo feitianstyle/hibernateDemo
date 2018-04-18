@@ -17,5 +17,9 @@
         <property name="deptNo">
             <column name="deptNo" sql-type="int(10)" />
         </property>
+        <set name="users">
+            <key column="deptNo"/>
+            <one-to-many class="com.feitian.pojo.User"/>
+        </set>
     </class>
 </hibernate-mapping>
