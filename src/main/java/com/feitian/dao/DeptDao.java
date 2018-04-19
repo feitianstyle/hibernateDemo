@@ -3,6 +3,7 @@ package com.feitian.dao;
 import com.feitian.pojo.Dept;
 import com.feitian.utils.HibernateUtil;
 
+import javax.crypto.spec.DESedeKeySpec;
 import java.io.Serializable;
 
 /**
@@ -20,6 +21,9 @@ public class DeptDao {
         return HibernateUtil.getCurrentSession().get(Dept.class,id);
     }
     public void saveByDept(Dept dept){
+        HibernateUtil.getCurrentSession().save(dept);
+    }
+    public void updateDept(Dept dept){
         HibernateUtil.getCurrentSession().save(dept);
     }
 }

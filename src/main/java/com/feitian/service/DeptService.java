@@ -45,4 +45,18 @@ public class DeptService {
         }
     }
 
+    public void updateDept(Dept dept){
+        Transaction tx = null ;
+        try{
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+            deptDao.updateDept(dept);
+            tx.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
 }

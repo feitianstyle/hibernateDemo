@@ -16,13 +16,13 @@ public class User implements Serializable {
     private String address;
     private String wife;
     private Date birthday;
-    private Dept deptNo;
+    private Dept dept;
 
-    public Dept getDeptNo() {
-        return deptNo;
+    public Dept getDept() {
+        return dept;
     }
-    public void setDeptNo(Dept deptNo) {
-        this.deptNo = deptNo;
+    public void setDept(Dept dept) {
+        this.dept = dept;
     }
     public Date getBirthday() {
         return birthday;

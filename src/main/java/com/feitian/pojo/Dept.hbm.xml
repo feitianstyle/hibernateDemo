@@ -1,24 +1,18 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping>
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-    <class name="com.feitian.pojo.Dept" table="dept" schema="user">
-        <id name="id">
-            <column name="id" sql-type="int(10)"/>
-        </id>
-        <property name="deptNo" column="deptNo" type="java.lang.Integer"/>
-        <property name="name">
-            <column name="name" sql-type="varchar(255)" />
-        </property>
-        <property name="address">
-            <column name="address" sql-type="varchar(255)"/>
-        </property>
+<hibernate-mapping>
+    <class name="com.feitian.pojo.Dept" table="dept">
+        <id name="deptNo" column="deptNo" type="java.lang.Integer"/>
+        <property name="name" column="name" type="java.lang.String"/>
+        <property name="address" column="address" type="java.lang.String"/>
+        <!--多对一自动关联user表 设置save-update时关联-->
         <set name="users" cascade="save-update">
-            <key column="deptNo" />
+            <key column="deptNo"/>
             <one-to-many class="com.feitian.pojo.User"/>
         </set>
-
+        
     </class>
 </hibernate-mapping>
