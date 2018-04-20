@@ -60,4 +60,55 @@ public class TestHQLJoin {
             }
         }
     }
+
+    public void testJoin(){
+        Transaction tx = null;
+        try {
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+
+            String hql = " from Dept d ,User u where d=u.dept ";
+
+            List<Object[]> obj = HibernateUtil.getCurrentSession().createQuery(hql).list();
+            for (Object[] ob:obj) {
+                System.out.println(((Dept)ob[0]).getName());
+                System.out.println(((User)ob[1]).getName());
+            }
+            tx.commit();
+        }catch (HibernateError error){
+            error.printStackTrace();
+            if (tx!=null){
+                tx.rollback();
+            }
+        }
+    }
+
+    /**
+     * 隐式内连接
+     * 
+     */
+    public void testImplicitJoin(){
+        Transaction tx = null;
+        try {
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+
+//            String hql = " select name,address,dept.name from User ";
+//            List<Object[]> objects = HibernateUtil.getCurrentSession().createQuery(hql).list();
+//            for (Object[] ob:objects) {
+//                System.out.println(ob[0]);
+//                System.out.println(ob[1]);
+//                System.out.println(ob[2]);
+//            }
+            String hql = "from User u where u.dept.deptNo = 1 ";
+            List<User> obj = HibernateUtil.getCurrentSession().createQuery(hql).list();
+            for (User ob:obj) {
+                System.out.println(ob.getName());
+            }
+            tx.commit();
+        }catch (HibernateError error){
+            error.printStackTrace();
+            if (tx!=null){
+                tx.rollback();
+            }
+        }
+    }
 }

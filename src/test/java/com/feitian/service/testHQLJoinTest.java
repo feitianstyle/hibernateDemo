@@ -20,4 +20,14 @@ public class testHQLJoinTest {
     public void testLeftJoinFetch() {
         new TestHQLJoin().testLeftJoinFetch();
     }
+
+    @Test
+    public void testJoin() {
+        new TestHQLJoin().testJoin();
+    }
+
+    @Test
+    public void testImplicitJoin() {
+        new TestHQLJoin().testImplicitJoin();
+    }
 }
