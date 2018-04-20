@@ -4,15 +4,15 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.feitian.pojo.Dept" table="dept">
+    <class name="com.feitian.pojo.Dept" table="dept" lazy="true">
         <id name="deptNo" column="deptNo" type="java.lang.Integer"/>
         <property name="name" column="name" type="java.lang.String"/>
         <property name="address" column="address" type="java.lang.String"/>
         <!--多对一自动关联user表 设置save-update时关联-->
-        <set name="users" cascade="save-update">
+        <!--建议使用增强懒加载-->
+        <set name="users" cascade="save-update" lazy="extra">
             <key column="deptNo"/>
             <one-to-many class="com.feitian.pojo.User"/>
         </set>
-        
     </class>
 </hibernate-mapping>

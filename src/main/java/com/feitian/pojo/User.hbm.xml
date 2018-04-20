@@ -20,7 +20,7 @@
         <property name="salary" column="salary" type="java.lang.Double"/>
         <property name="wife" column="wife" type="java.lang.String"/>
 
-        <many-to-one name="dept" column="deptNo" class="com.feitian.pojo.Dept" insert="false" update="false" />
+        <many-to-one name="dept" column="deptNo" lazy="proxy" class="com.feitian.pojo.Dept" insert="false" update="false" />
 
     </class>
 </hibernate-mapping>
