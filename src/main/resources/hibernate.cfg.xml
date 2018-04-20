@@ -25,10 +25,5 @@
         <mapping resource="com/feitian/pojo/User.hbm.xml"/>
         <mapping resource="com/feitian/pojo/Dept.hbm.xml"/>
         <mapping class="com.feitian.pojo.Dept"/>
-        <mapping class="com.feitian.pojo.Emp"/>
-        <mapping resource="com/feitian/pojo/Emp.hbm.xml"/>
-        <mapping resource="com/feitian/pojo/Project.hbm.xml"/>
-        <mapping class="com.feitian.pojo.Project"/>
-
     </session-factory>
 </hibernate-configuration>
