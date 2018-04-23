@@ -1,5 +1,6 @@
 package com.feitian.pojo;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,14 +9,28 @@ import java.util.Date;
  * @Date: 2018-04-16  14:57
  * @description:
  */
+@Entity
+@Table(name="user")//默认表名与类名一致
 public class User implements Serializable {
+    @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY,generator = "seq_name") //增长方式
+    //@SequenceGenerator(name="seq_name",sequenceName = "user_seq",initialValue = 1,allocationSize = 10)
     private int id;
+    @Column(name="name")
     private String name;
+    @Column(name="sex")
     private String sex;
+    @Column(name="salary")
     private double salary;
+    @Column(name="address")
     private String address;
+    @Column(name="wife")
     private String wife;
+    @Column(name="birthday")
     private Date birthday;
+//    @Transient
+    @ManyToOne(targetEntity = Dept.class,cascade = {CascadeType.MERGE},fetch = FetchType.LAZY)
+    @JoinColumn(name = "deptNo")
     private Dept dept;
 
     public Dept getDept() {

@@ -30,4 +30,8 @@ public class testHQLJoinTest {
     public void testImplicitJoin() {
         new TestHQLJoin().testImplicitJoin();
     }
+    @Test
+    public void testGroup(){
+        new TestHQLJoin().testGourp();
+    }
 }

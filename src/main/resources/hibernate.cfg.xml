@@ -23,7 +23,8 @@
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <!--引入映射文件-->
         <mapping resource="com/feitian/pojo/User.hbm.xml"/>
-        <mapping resource="com/feitian/pojo/Dept.hbm.xml"/>
+        <!--<mapping class="com.feitian.pojo.User"/>-->
+        <!--<mapping resource="com/feitian/pojo/Dept.hbm.xml"/>-->
         <mapping class="com.feitian.pojo.Dept"/>
     </session-factory>
 </hibernate-configuration>

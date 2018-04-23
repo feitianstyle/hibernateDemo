@@ -1,5 +1,6 @@
 package com.feitian.pojo;
 
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -7,10 +8,16 @@ import java.util.Set;
  * @Date: 2018-04-19  19:07
  * @description:
  */
+@Entity
 public class Dept {
+    @Id
     private Integer deptNo;
+    @Column(name="name")
     private String name;
+    @Column(name="address")
     private String address;
+//    @Transient
+    @OneToMany(targetEntity = User.class,fetch = FetchType.LAZY,mappedBy = "dept",cascade = {CascadeType.MERGE})
     private Set<User> users;
 
     public Set<User> getUsers() {

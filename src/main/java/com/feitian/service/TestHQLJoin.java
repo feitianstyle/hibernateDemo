@@ -84,7 +84,7 @@ public class TestHQLJoin {
 
     /**
      * 隐式内连接
-     * 
+     *
      */
     public void testImplicitJoin(){
         Transaction tx = null;
@@ -102,6 +102,29 @@ public class TestHQLJoin {
             List<User> obj = HibernateUtil.getCurrentSession().createQuery(hql).list();
             for (User ob:obj) {
                 System.out.println(ob.getName());
+            }
+            tx.commit();
+        }catch (HibernateError error){
+            error.printStackTrace();
+            if (tx!=null){
+                tx.rollback();
+            }
+        }
+    }
+
+    /**
+     * 分组查询
+     */
+    public void testGourp(){
+        Transaction tx = null;
+        try {
+            tx = HibernateUtil.getCurrentSession().beginTransaction();
+
+            String hql = " select avg(u.salary),u.dept.name from User u group by u.dept.name";
+
+            List<Object[]> obj = HibernateUtil.getCurrentSession().createQuery(hql).list();
+            for (Object[] ob:obj) {
+                System.out.println(ob[0] + " , name: " + ob[1]);
             }
             tx.commit();
         }catch (HibernateError error){

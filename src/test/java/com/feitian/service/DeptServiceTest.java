@@ -34,7 +34,7 @@ public class DeptServiceTest {
     @Test
     public void save() {
         Dept dept = new Dept();
-        dept.setDeptNo(1);
+        dept.setDeptNo(10);
 
         dept.setAddress("大英");
         dept.setName("市场部");
